@@ -72,6 +72,17 @@ margin-right: \${({ theme }) => theme.spacing(4, 2)};
             </pre>
           </div>
         </div>
+        <div className="signature">
+          Open sourced on{" "}
+          <a
+            href="https://github.com/jimmybrawn/convert-jss"
+            target="blank"
+            noopener
+            noreferer
+          >
+            GitHub
+          </a>
+        </div>
       </main>
     </div>
   );
