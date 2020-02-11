@@ -1,4 +1,4 @@
-# styledsyntax-web
+# Convert JSS
 
 A simple code parser to migrate from object based css (React/MUI):
 
