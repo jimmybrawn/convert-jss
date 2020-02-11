@@ -8,6 +8,7 @@ function App() {
   flexWrap: "nowrap",
   flexGrow: 1,
   maxWidth: 315,
+  marginRight: theme.spacing(4, 2),
   marginRight: theme.spacing(4),
 `;
   const [source, setSource] = useState(``);
@@ -35,11 +36,16 @@ function App() {
 
   return (
     <div className='App'>
-      <header className='App-header'>Styled components syntaxer</header>
+      <header className='App-header'>Migrate JSS Syntax
+      <div>
+
+      <small>From Object based (Material UI's JSS, makeStyles) to CSS (good for styled-components)</small>
+      </div>
+      </header>
       <main>
-        <div className="panels">
-          <div className="panel panel-left">
-            <label>makeStyles (input)</label>
+        <div className='panels'>
+          <div className='panel panel-left'>
+            <label>Object based CSS (input)</label>
             <textarea
               onChange={e => setSource(e.currentTarget.value)}
               defaultValue={
@@ -47,7 +53,7 @@ function App() {
             />
           </div>
           <div className='panel panel-right'>
-            <label>Styled Components (output)</label>
+            <label>CSS (output)</label>
             <textarea defaultValue={toStyledSyntax(source)} disabled />
           </div>
         </div>
