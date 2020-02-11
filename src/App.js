@@ -29,7 +29,10 @@ function App() {
       <header className="App-header">
         Convert JSS format
         <div>
-          <small>From Object based CSS to plain CSS</small>
+          <small>
+            From Object based (React/MUI) CSS to plain (S)CSS (Styled
+            components)
+          </small>
         </div>
       </header>
       <main>
