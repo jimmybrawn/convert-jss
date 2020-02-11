@@ -4,14 +4,6 @@ import "./App.css";
 import React, { useState } from "react";
 
 function App() {
-  const testString = `
-  display: "flex",
-  flexWrap: "nowrap",
-  flexGrow: 1,
-  maxWidth: 315,
-  marginRight: theme.spacing(4, 2),
-  marginRight: theme.spacing(4),
-`;
   const [source, setSource] = useState(``);
 
   const toStyledSyntax = (string: string) => {
@@ -23,25 +15,21 @@ function App() {
 
     newString = newString.replace(/"/g, ""); // remove quotes (TODO; add exceptions)
     newString = newString.replace(/(theme.\w+.+\))/g, "${({ theme }) => $1}"); // Refactor theme prop
-    console.log(newString);
     newString = newString.replace(/(},)+/g, "}");
     if (newString[newString.length - 1] === ",") {
       newString = newString.replace(/(,$)/g, ";");
     }
-
     return newString;
-    // margin: ${({ theme }) => theme.spacing(2, 3)};
   };
-
+  function handleClick() {
+    console.log("Button click ...");
+  }
   return (
     <div className="App">
       <header className="App-header">
-        Migrate JSS Syntax
+        Convert JSS format
         <div>
-          <small>
-            From Object based (Material UI's JSS, makeStyles) to CSS (good for
-            styled-components)
-          </small>
+          <small>From Object based CSS to plain CSS</small>
         </div>
       </header>
       <main>
@@ -49,19 +37,38 @@ function App() {
           <div className="panel panel-left">
             <label>Object based CSS (input)</label>
             <textarea
+              placeholder="Paste object based CSS here"
               onChange={e => setSource(e.currentTarget.value)}
               defaultValue={source}
             />
+            <label>Example (input)</label>
+            <pre>
+              {`display: "flex",
+flexWrap: "nowrap",
+flexGrow: 1,
+maxWidth: 315,
+marginRight: theme.spacing(4, 2),
+customClassName: {
+  borderBottom: "1px solid black"
+}`}
+            </pre>
           </div>
           <div className="panel panel-right">
-            <label>CSS (output)</label>
-            <textarea defaultValue={toStyledSyntax(source)} disabled />
+            <label>CSS (output)</label>{" "}
+            <textarea value={toStyledSyntax(source)} />
+            <label>Example (output)</label>
+            <pre>
+              {`display: flex;
+flex-wrap: nowrap;
+flex-grow: 1,
+max-width: 315,
+margin-right: \${({ theme }) => theme.spacing(4, 2)};
+.custom-class-name {
+  border-bottom: 1px solid black;
+}`}
+            </pre>
           </div>
         </div>
-        {/* <pre>
-          display: "flex", flexWrap: "nowrap", flexGrow: 1, maxWidth: 315,
-          marginRight: theme.spacing(4, 2),
-        </pre> */}
       </main>
     </div>
   );
